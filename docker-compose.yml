@@ -1,0 +1,15 @@
+services:
+  seedbox-sync:
+    image: seedbox-sync:latest
+    container_name: seedbox-sync
+    hostname: seedbox-sync
+    user: root
+    restart: unless-stopped
+    environment:
+      USER: ${USER}
+      PASSWORD: ${PASSWORD}
+      HOST: ${HOST}
+      REMOTE_DIR: ${REMOTE_DIR}
+      SYNC_INTERVAL: ${SYNC_INTERVAL:-3600}
+    volumes:
+      - ${LOCAL_DIR:-./downloads}:/downloads
